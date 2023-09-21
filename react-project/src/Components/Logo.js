@@ -1,10 +1,13 @@
 import React from 'react'
 import logo from '../quarz-logo.png';
+import {Link} from 'react-router-dom';
 const Logo = () => {
   return (
     <div>
-        <img src={logo} width='40px' height='50px' alt='quarz-epoxi' /> {' '}
-        Quarz Epoxi
+        <Link to="/">
+          <img src={logo} width='40px' height='50px' alt='quarz-epoxi' />
+        </Link>
+        {' '} Quarz Epoxi
     </div>
   )
 }
