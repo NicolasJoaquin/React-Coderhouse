@@ -1,25 +1,27 @@
 import React from 'react'
 import Item from './Item'
-import ItemListLoader from './ItemListLoader'
+import ItemListLoader from './ItemLoader'
 
 const ItemList = ({items}) => {   
-    // METER useEffect y meter loader 
     if(items.length == 0)
         return (
-            <h2>NO HAY PRODUCTOS</h2>
+            <h2>No hay productos para la categoría indicada</h2>
         )
     else {
         if(items[0] == 'loader')
-            return (<ItemListLoader />)
+            return (
+                <ItemListLoader />
+            )
         else {
             return (
-                <div className='row'>
+                <div className='row' id='itemList'>
                     <h3>Lista de productos</h3>
                     <hr/>
                     {items.map((i) => {
-                        // Cuerpo de la función
                         return(
-                            <Item key={i.id} id={i.id} name={i.name} description={i.description} price={i.price} stock={i.stock} pictureUrl={i.pictureUrl} />
+                            <div className='col-md-4' key={i.id}>
+                                <Item id={i.id} name={i.name} description={i.description} price={i.price} stock={i.stock} pictureUrl={i.pictureUrl} />
+                            </div>
                         )
                     })}
                 </div>
