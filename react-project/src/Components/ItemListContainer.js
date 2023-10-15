@@ -1,58 +1,42 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useParams } from 'react-router-dom';
-import arrayProductos from '../Json/arrayProductos.json';
 import ItemList from './ItemList';
-const ItemListContainer = ({greeting}) => {
-  // Funciones y promesas
-  const getProducts = () => {
-    return new Promise((resolve, reject) => {
-      const productsFiltered = arrayProductos.filter((p) => {
-        if(category != undefined && p.category == category) {
-          return p
-        }
-        if(categoryId != undefined && p.categoryId == categoryId) {
-          return p
-        }
-      })
-      let newProducts = [];
-      if(category == undefined && categoryId == undefined)
-        newProducts = arrayProductos
-      else
-        newProducts = productsFiltered
-      setTimeout(() => {
-        resolve(newProducts);
-        // reject(new Error("No hay producto con ese id"));
-      }, 2000);    
-    });
-  }
-  const mock = async () => {
-    try {
-      const data = await getProducts();
-      setActualProducts(data)
-    }
-    catch(err) {
-      console.log("Error: ", err)
-    }
-  }
+import {getFirestore, collection, getDocs, where, query, orderBy} from 'firebase/firestore';
+
+const ItemListContainer = ({greeting}) => {  
   // Hooks
   const [actualProducts, setActualProducts] = useState(['loader']);
   const {category, categoryId} = useParams();
+
   useEffect(() => {
-    mock();
+    // get de los datos (productos) desde Firebase
+    const queryDb = getFirestore();
+    const queryCollection = collection(queryDb, 'products');
+    // Filtrado por categoría
+    if(categoryId) {
+      const queryFilterCatId = query(queryCollection, where('categoryId', '==', parseInt(categoryId)), orderBy('categoryId', 'asc'));
+      getDocs(queryFilterCatId)
+      .then((res) => setActualProducts(res.docs.map((p) => ({id: p.id, ...p.data()}))))
+    }
+    if(category) {
+      const queryFilterCat = query(queryCollection, where('category', '==', category), orderBy('categoryId', 'asc'));
+      getDocs(queryFilterCat)
+      .then((res) => setActualProducts(res.docs.map((p) => ({id: p.id, ...p.data()}))))
+    }
+    if(categoryId == undefined && category == undefined) {
+      const queryNotFiltered = query(queryCollection, orderBy('categoryId', 'asc'))
+      getDocs(queryNotFiltered)
+      .then((res) => setActualProducts(res.docs.map((p) => ({id: p.id, ...p.data()}))))  
+    }
     // Función de limpieza
     return () => setActualProducts(['loader'])
   }, [category, categoryId])
+  
   return (
-    <div className='container'>
+    <div className='container mt-10'>
       <div className='row'>
         <ItemList items={actualProducts}/>
       </div>
-        {/* Ejemplos */}
-        {/* <h2>{greeting}</h2> */}
-        {/* <button className="btn btn-lg btn-primary mb-3" onClick={() => mock()}>Obtener productos</button> */}
-        {/* <button className="btn btn-lg btn-primary mb-3" onClick={() => getProductAwait(10)}>Obtener producto</button> */}
-        {/* <FetchData/> */}
-        {/* <ItemCount stock={10} initial={1}/> */}
     </div>
   )
 }

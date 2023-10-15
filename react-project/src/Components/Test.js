@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import cartContext from '../Context/CartContext';
 
 const Test = () => {
+    const context = useContext(cartContext);
     const handleClick = (event) => {
         let tecla = event.key; 
         tecla = tecla.toLowerCase();
@@ -9,7 +11,7 @@ const Test = () => {
     }
 
   return (
-    <div className='col-md-4'>
+    <div className='col-md-4 mt-10'>
         <input type='text' className='form-control m-4 col-md-3' placeholder='Escribí...' onKeyDown={handleClick}></input>
     </div>
   )

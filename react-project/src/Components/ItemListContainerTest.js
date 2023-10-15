@@ -45,7 +45,6 @@ const ItemListContainer = ({greeting}) => {
         newProducts = productsFiltered
       setTimeout(() => {
         resolve(newProducts);
-        // reject(new Error("No hay producto con ese id"));
       }, 2000);
     });
   }
@@ -81,7 +80,6 @@ const ItemListContainer = ({greeting}) => {
             newProducts = productsFiltered
           setTimeout(() => {
             resolve(newProducts);
-            // reject(new Error("No hay producto con ese id"));
           }, 2000);    
         })
         setActualProducts(data)
@@ -94,22 +92,11 @@ const ItemListContainer = ({greeting}) => {
     // Función de limpieza
     return () => setActualProducts(['loader'])
   }, [category, categoryId])
-  // useEffect(() => {
-  //   mock();
-  //   // Función de limpieza
-  //   return () => setActualProducts(['loader'])
-  // }, [products, category, categoryId])
   return (
     <div className='container'>
       <div className='row'>
         <ItemList items={actualProducts}/>
       </div>
-        {/* Ejemplos */}
-        {/* <h2>{greeting}</h2> */}
-        {/* <button className="btn btn-lg btn-primary mb-3" onClick={() => mock()}>Obtener productos</button> */}
-        {/* <button className="btn btn-lg btn-primary mb-3" onClick={() => getProductAwait(10)}>Obtener producto</button> */}
-        {/* <FetchData/> */}
-        {/* <ItemCount stock={10} initial={1}/> */}
     </div>
   )
 }

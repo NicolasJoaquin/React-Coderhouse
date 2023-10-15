@@ -24,7 +24,6 @@ const FetchData = () => {
         <div>
             <h2>Lista de usuarios:</h2>
             <ul>
-                {/* {console.log(users)} */}
                 {users.map((u) => {
                     // Cuerpo de la función
                     return(

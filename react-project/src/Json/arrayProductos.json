@@ -90,13 +90,13 @@
       "categoryId": 5
     },
     {
-      "id": 2,
-      "name": "Glitter 10 gr.",
+      "category": "glitters",
+      "categoryId": 3,
       "description": "Glitter trama fina",
+      "name": "Glitter 10 gr.",
       "pictureUrl": "glitter-stich.jpg",
       "price": 100,
       "stock": 20,
-      "category": "glitters",
-      "categoryId": 3
+      "id": 2
     }
   ]

@@ -8,7 +8,7 @@ import {Link} from 'react-router-dom';
 const NavBar = () => {
   return (
     <div>
-        <Navbar bg="dark" data-bs-theme="dark">
+        <Navbar bg="dark" data-bs-theme="dark" className='fixed-top'>
             <Container>
                 <Navbar.Brand to="#">
                     <Logo />
@@ -17,6 +17,7 @@ const NavBar = () => {
                     <Link to="/" className='nav-link'>Home</Link>
                     {/* <Link to="/resinas" className='nav-link'>Resinas</Link>
                     <Link to="/pigmentos" className='nav-link'>Pigmentos</Link>
+                    <Link to="/glitters" className='nav-link'>Glitters</Link>
                     <Link to="/moldes" className='nav-link'>Moldes</Link>
                     <Link to="/accesorios" className='nav-link'>Accesorios</Link> */}
                     <Link to="/category/1" className='nav-link'>Resinas</Link>
