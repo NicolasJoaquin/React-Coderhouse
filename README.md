@@ -14,7 +14,7 @@ En en esta aplicación podés
 - Visualizar y gestionar los productos agregados al carrito de compras
 - Ejecutar compras completando el formulario de checkout
 
-###Tecnologías
+### Tecnologías
 - React.js
 - React Router DOM V6.16.0
 - Firestore Database > Firebase
